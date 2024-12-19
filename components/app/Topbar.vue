@@ -7,6 +7,15 @@ const setColorTheme = (newTheme: "light" | "dark") => {
   colorMode.preference = newTheme;
 };
 
+import { ref } from "vue";
+
+const isMenuOpen = ref(false);
+
+// Toggle the mobile menu
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
 watch(
   () => colorMode.preference,
   (newTheme) => {
@@ -25,9 +34,32 @@ watch(
     class="border-b bg-transparent dark:bg-transparent backdrop-blur-xl bg-opacity-30 dark:bg-opacity-30 border-gray-300 dark:border-gray-800 flex h-14 w-full items-center sticky z-40 top-0"
   >
     <div class="flex justify-between items-center p-4 w-full">
-      <div class="flex gap-3 items-center">
+      <div class="flex gap-3 items-center w-full">
+        <!-- Hamburger Menu Icon (only visible on mobile) -->
+        <button
+          class="lg:hidden flex items-center justify-center p-2"
+          @click="toggleMenu"
+          aria-label="Toggle navigation"
+        >
+          <svg
+            class="h-6 w-6 text-gray-800 dark:text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+
+        <!-- Logo Title (visible on larger screens) -->
         <svg
-          class="h-6 w-6"
+          class="h-6 w-6 hidden lg:flex"
           viewBox="0 0 256 256"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -54,34 +86,95 @@ watch(
             </clipPath>
           </defs>
         </svg>
-        <h1 class="font-base font-bold dark:text-white">shadcn-vue</h1>
+        <h1 class="font-base font-bold dark:text-white hidden lg:block">shadcn-vue</h1>
 
+        <!-- Navigation Links (hidden on mobile, visible on larger screens) -->
         <ul
-          class="flex gap-10 ml-40 text-gray-500 dark:text-gray-300 text-sm font-medium transition-colors"
+          class="flex gap-10 ml-40 text-gray-500 dark:text-gray-300 text-sm font-medium transition-colors hidden lg:flex"
         >
           <li class="dark:hover:text-white"><NuxtLink to="/about">Docs</NuxtLink></li>
-          <li class="dark:hover:text-white">
+          <li class="dark:hover:text-white"><NuxtLink to="/">Components</NuxtLink></li>
+          <li class="dark:hover:text-white"><NuxtLink to="/">Themes</NuxtLink></li>
+          <li class="dark:hover:text-white"><NuxtLink to="/">Examples</NuxtLink></li>
+          <li class="dark:hover:text-white"><NuxtLink to="/">Blocks</NuxtLink></li>
+          <li class="dark:hover:text-white"><NuxtLink to="/">Githubs</NuxtLink></li>
+        </ul>
+
+        <!-- Mobile Navigation Menu (hidden on larger screens) -->
+        <ul
+          v-if="isMenuOpen"
+          class="lg:hidden h-screen absolute top-14 left-0 w-full bg-white dark:bg-black border-b border-gray-300 dark:border-gray-800 text-gray-500 dark:text-white p-4 transition-opacity duration-500 ease-in-out"
+          :class="{ 'opacity-0': !isMenuOpen, 'opacity-100': isMenuOpen }"
+        >
+          <div class="flex gap-3 mb-2 p-2">
+            <!-- Logo Title (visible on larger screens) -->
+            <svg
+              class="h-6 w-6"
+              viewBox="0 0 256 256"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_102_1338)">
+                <path
+                  d="M208 128L128 208"
+                  stroke="#41B883"
+                  stroke-width="16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M192 40L40 192"
+                  stroke="#41B883"
+                  stroke-width="16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_102_1338">
+                  <rect width="256" height="256" fill="white"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+            <h1 class="font-base font-bold dark:text-white">shadcn-vue</h1>
+          </div>
+          <li
+            class="py-2 text-gray-500 dark:text-gray-300 text-sm font-medium transition-colors"
+          >
+            <NuxtLink to="/about">Docs</NuxtLink>
+          </li>
+          <li
+            class="py-2 text-gray-500 dark:text-gray-300 text-sm font-medium transition-colors"
+          >
             <NuxtLink to="/">Components</NuxtLink>
           </li>
-          <li class="dark:hover:text-white">
+          <li
+            class="py-2 text-gray-500 dark:text-gray-300 text-sm font-medium transition-colors"
+          >
             <NuxtLink to="/">Themes</NuxtLink>
           </li>
-          <li class="dark:hover:text-white">
+          <li
+            class="py-2 text-gray-500 dark:text-gray-300 text-sm font-medium transition-colors"
+          >
             <NuxtLink to="/">Examples</NuxtLink>
           </li>
-          <li class="dark:hover:text-white">
+          <li
+            class="py-2 text-gray-500 dark:text-gray-300 text-sm font-medium transition-colors"
+          >
             <NuxtLink to="/">Blocks</NuxtLink>
           </li>
-          <li class="dark:hover:text-white">
+          <li
+            class="py-2 text-gray-500 dark:text-gray-300 text-sm font-medium transition-colors"
+          >
             <NuxtLink to="/">Githubs</NuxtLink>
           </li>
         </ul>
       </div>
 
-      <div class="flex gap-3 mr-8">
+      <div class="flex gap-3 mr-8 items-center">
         <Input
-          placeholder="Search documentation..."
-          class="h-8 w-[15rem] dark:bg-black dark:border-gray-800 rounded-lg"
+          placeholder="Search..."
+          class="h-8 w-[10rem] sm:w-[15rem] dark:bg-black dark:border-gray-800 rounded-lg"
         />
 
         <div class="flex gap-1 items-center">
@@ -173,3 +266,9 @@ watch(
     </div>
   </div>
 </template>
+<style scoped>
+/* Assurez-vous d'ajouter cette classe dans votre CSS global ou scoped */
+.transition-opacity {
+  transition: opacity 0.5s ease-in-out;
+}
+</style>

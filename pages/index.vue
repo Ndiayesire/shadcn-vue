@@ -15,23 +15,22 @@ useHead({
     <!-- Banner Section -->
     <Banner />
 
-    <!-- Main Content Section -->
-    <div class="relative p-8 w-full mt-8">
+    <div class="relative p-8 w-full flex justify-center items-center">
       <!-- Carousel Container -->
       <div
         class="grid grid-cols-1 sm:grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4 w-full h-full"
       >
         <!-- Carousel Items -->
-        <div class="flex-shrink-0 w-96">
+        <div class="flex-shrink-0 w-full">
           <Card />
         </div>
-        <div class="flex-shrink-0 w-96">
+        <div class="flex-shrink-0 w-full">
           <Payment />
         </div>
-        <div class="flex-shrink-0 w-96">
+        <div class="flex-shrink-0 w-full">
           <Issue />
         </div>
-        <div class="flex-shrink-0 w-96">
+        <div class="flex-shrink-0 w-full">
           <Notif />
         </div>
       </div>

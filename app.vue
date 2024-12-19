@@ -3,8 +3,8 @@
     <Topbar />
     <main class="flex-1 overflow-auto">
       <NuxtPage />
+      <Footer />
     </main>
-    <Footer />
   </div>
 </template>
 

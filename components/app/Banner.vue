@@ -1,28 +1,29 @@
 <template>
-  <div class="mx-auto flex flex-col items-center mt-[4rem] gap-2">
+  <div class="flex flex-col items-center justify-center mt-[4rem] gap-2 text-center">
+    <!-- Link -->
     <a
       href="/docs/components/auto-form.html"
       class="inline-flex items-center rounded-lg bg-gray-100 dark:bg-gray-800 px-3 py-1 text-sm font-medium"
-      >✨ Extended: Auto Form, Charts
+    >
+      ✨ Extended: Auto Form, Charts
     </a>
+
+    <!-- Title -->
     <h1 class="text-5xl font-bold leading-tight tracking-tighter">
       Build your component library.
     </h1>
+
+    <!-- Description -->
     <span
-      class="max-w-[750px] text-center text-lg font-base text-foreground"
+      class="max-w-[750px] text-lg font-base text-foreground font-light"
       data-brr="1"
       data-allow-mismatch="true"
-      style="
-        display: inline-block;
-        vertical-align: top;
-        text-decoration: inherit;
-        text-wrap: initial;
-        max-width: 494px;
-      "
     >
       Beautifully designed components that you can copy and paste into your apps.
-      Accessible. Customizable. Open Source.</span
-    >
+      Accessible. Customizable. Open Source.
+    </span>
+
+    <!-- Buttons -->
     <div class="flex w-full items-center justify-center space-x-4 py-4">
       <Button class="bg-primary">Get started</Button>
       <Button variant="outline">
